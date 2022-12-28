@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: second-app-backend
+  name: angular-demo-backend
   labels:
-    group: example
+    group: experiment
 spec:
   selector: #control what pods to expose to the cluster/outside
-    app: second-app
+    app: angular-demo
     tier: backend
   ports:
     - protocol: 'TCP'
       port: 80
-      targetPort: 8080
+      targetPort: 80
       
   type: LoadBalancer
 
@@ -20,33 +20,24 @@ apiVersion: apps/v1
 kind: Deployment # Could alternativley define a service or a job!
 
 metadata:
-  name: second-app-deployment
+  name: angular-demo-deployment
   labels:
-    group: example
+    group: experiment
 
 spec: # definition of our deployment
   replicas: 1 # how many pods do you want
   selector:
     matchLabels:
-      app: second-app
+      app: angular-demo
       tier: backend
 
   template: # definition of our pods
     metadata:
       labels:
-        app: second-app
+        app: angular-demo
         tier: backend
 
     spec:
       containers:
-        - name: second-node
-          image: ridhachowdhury/kub-first-app:latest
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8080
-            periodSeconds: 10
-            initialDelaySeconds: 5
-          
-        # - name: second-node
-        #   image: ridhachowdhury/first-app
+        - name: angular-site
+          image: ridhachowdhury/angular-demo:latest
