@@ -10,6 +10,14 @@ app.get('/', (req, res) => {
   `);
 });
 
+app.get('/home', (req, res) => {
+  res.send(`
+    <h1>Hello from this NodeJS app!</h1>
+    <p>welcome home!</p>
+    <p>Try sending a request to /error and see what happens</p>
+  `);
+});
+
 app.get('/error', (req, res) => {
   process.exit(1);
 });
