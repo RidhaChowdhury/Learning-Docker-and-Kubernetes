@@ -5,7 +5,7 @@ metadata:
   name: second-app-deployment
 
 spec: # definition of our deployment
-  replicas: 3 # how many pods do you want
+  replicas: 1 # how many pods do you want
   selector:
     matchLabels:
       app: second-app
