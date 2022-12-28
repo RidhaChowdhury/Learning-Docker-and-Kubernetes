@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: second-app-backend
+  labels:
+    group: example
 spec:
   selector: #control what pods to expose to the cluster/outside
     app: second-app
@@ -19,6 +21,8 @@ kind: Deployment # Could alternativley define a service or a job!
 
 metadata:
   name: second-app-deployment
+  labels:
+    group: example
 
 spec: # definition of our deployment
   replicas: 1 # how many pods do you want
@@ -37,6 +41,12 @@ spec: # definition of our deployment
       containers:
         - name: second-node
           image: ridhachowdhury/kub-first-app:3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSecond: 10
+            initialDelaySeconds: 5
           
         # - name: second-node
         #   image: ridhachowdhury/first-app
