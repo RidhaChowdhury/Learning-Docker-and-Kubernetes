@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment # Could alternativley define a service or a job!
+
+metadata:
+  name: second-app-deployment
+
+spec: # definition of our deployment
+  replicas: 3 # how many pods do you want
+  selector:
+    matchLabels:
+      app: second-app
+      tier: backend
+
+  template: # definition of our pods
+    metadata:
+      labels:
+        app: second-app
+        tier: backend
+
+    spec:
+      containers:
+        - name: second-node
+          image: ridhachowdhury/kub-first-app:2
+          
+        # - name: second-node
+        #   image: ridhachowdhury/first-app
