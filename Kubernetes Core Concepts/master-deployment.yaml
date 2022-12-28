@@ -40,7 +40,7 @@ spec: # definition of our deployment
     spec:
       containers:
         - name: second-node
-          image: ridhachowdhury/kub-first-app:3
+          image: ridhachowdhury/kub-first-app:latest
           livenessProbe:
             httpGet:
               path: /
